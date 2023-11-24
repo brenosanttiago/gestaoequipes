@@ -36,7 +36,7 @@ try {
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link" href="/ds2/controle/CtrlSair.php">SAIR</a>
+        <a class="nav-link" href="/gestaoequipes/controle/CtrlSair.php">SAIR</a>
         </li>
       </ul>
     </div>
@@ -53,7 +53,7 @@ try {
                 <h2>Equipes</h2>
             </div>
             <div class="col text-end">
-                <a href="/ds2/visao/formCadastrarEquipe.php" class="btn btn-primary">Cadastrar</a>
+                <a href="/gestaoequipes/visao/formCadastrarEquipe.php" class="btn btn-primary">Cadastrar</a>
             </div>
         </div>
         <table class="table">
@@ -71,7 +71,7 @@ try {
                         <td><?php echo $equipe['nome']; ?></td>
                         <td>
                           <button class="btn btn-danger">Excluir</button>
-                          <a href="/ds2/visao/formListarAtividades.php?equipe_id=<?php echo $equipe['equipe_id']; ?>" class="btn btn-success">Visualizar</a>
+                          <a href="/gestaoequipes/visao/formListarAtividades.php?equipe_id=<?php echo $equipe['equipe_id']; ?>" class="btn btn-success">Visualizar</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>

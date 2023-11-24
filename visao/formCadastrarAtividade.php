@@ -1,3 +1,16 @@
+<?php
+require '../dados/conexao.php';
+
+// Verifica se o ID da equipe foi passado via GET
+if(isset($_GET['equipe_id'])){
+    // Obtém o ID da equipe
+    $equipe_id = $_GET['equipe_id'];
+} else {
+    // Se o ID da equipe não estiver presente, redireciona para a página anterior
+    header("Location: ../visao/formListarEquipe.php");
+    exit();
+}
+?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -8,9 +21,10 @@
     <title>Cadastro de Atividade</title>
 </head>
 <body>
+<?php echo($equipe_id); ?>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="/caminho/para/formListarAtividades.php">Voltar</a>
+            <a class="navbar-brand" href="/gestaoequipes/visao/formListarAtividades.php">Voltar</a>
         </div>
     </nav>
 
@@ -20,13 +34,12 @@
                 <div class="card border-0 shadow-sm p-3">
                     <h4 class="card-title text-center">Cadastro de Atividade</h4>
                     <div class="card-body">
-                        <form action="/caminho/para/acaoDeCadastroAtividade.php" method="post">
-                            <input type="hidden" name="equipe_id" value="<?php echo $_GET['equipe_id']; ?>">
+                        <form action="/gestaoequipes/controle/CtrlAdicionarAtividade.php" method="post">
+                            <input type="hidden" name="equipe_id" value="<?php echo htmlspecialchars($_GET['equipe_id'] ?? '', ENT_QUOTES); ?>">
                             <div class="mb-3">
                                 <label for="descricao" class="form-label">Descrição da Atividade</label>
                                 <input type="text" class="form-control" id="descricao" name="descricao" required>
                             </div>
-                            <!-- Outros campos de formulário, se necessário -->
                             <div class="d-grid gap-2">
                                 <button type="submit" class="btn btn-primary">Cadastrar</button>
                             </div>

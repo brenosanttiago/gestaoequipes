@@ -34,11 +34,9 @@ if (isset($_GET['equipe_id'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Atividades da Equipe</title>
-    <style>
-        /* Seus estilos CSS podem ser colocados aqui */
-    </style>
 </head>
 <body>
+<?php echo($equipe_id); ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a class="navbar-brand" href="/"><?php echo($_SESSION["nome"]); ?></a>
@@ -48,7 +46,7 @@ if (isset($_GET['equipe_id'])) {
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-        <a class="nav-link" href="/ds2/controle/CtrlSair.php">SAIR</a>
+        <a class="nav-link" href="/gestaoequipes/controle/CtrlSair.php">SAIR</a>
         </li>
       </ul>
     </div>
@@ -66,7 +64,7 @@ if (isset($_GET['equipe_id'])) {
             </div>
             <div class="col text-end">
                 <!-- Link para a página de cadastro de atividades -->
-                <a href="/ds2/visao/formCadastrarAtividade.php" class="btn btn-primary">Cadastrar Atividade</a>
+                <a href="../visao/formCadastrarAtividade.php?equipe_id=<?php echo $_GET['equipe_id']; ?>" class="btn btn-primary">Cadastrar Atividade</a>
             </div>
         </div>
         <table class="table">

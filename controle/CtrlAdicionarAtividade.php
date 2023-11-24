@@ -1,27 +1,39 @@
 <?php
-// Verifica se os dados do formulário foram enviados via método POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    require '../dados/conexao.php'; // Inclui o arquivo de conexão com o banco de dados
+    require '../dados/conexao.php';
+    session_start();
 
-    // Recebe os dados do formulário
-    $equipe_id = $_POST['equipe_id'];
-    $descricao = $_POST['descricao'];
-
-    try {
-        // Prepara a instrução SQL para inserir a atividade na tabela
-        $stmt = $pdo->prepare('INSERT INTO atividades (descricao, equipe_id) VALUES (?, ?)');
-        $stmt->execute([$descricao, $equipe_id]);
-
-        // Redireciona de volta para a página de listagem de atividades da equipe
-        header("Location: formListarAtividades.php?equipe_id=$equipe_id");
+    if (!isset($_SESSION["nome"])) {
+        header("Location: ../visao/formAutenticar.php");
         exit();
-    } catch (PDOException $e) {
-        // Em caso de erro, exibe uma mensagem ou realiza alguma ação adequada
-        echo 'Erro ao cadastrar atividade: ' . $e->getMessage();
+    }
+
+    if (isset($_POST['equipe_id'], $_POST['descricao'])) {
+        $equipe_id = $_POST['equipe_id'];
+        $descricao = $_POST['descricao'];
+
+        try {
+            $stmt = $pdo->prepare('SELECT equipe_id FROM equipe WHERE equipe_id = ?');
+            $stmt->execute([$equipe_id]);
+            $equipe = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($equipe) {
+                $consulta = $pdo->prepare('INSERT INTO atividade (descricao, equipe_id) VALUES (?, ?)');
+                $consulta->execute([$descricao, $equipe_id]);
+
+                header("Location: ../visao/formListarAtividades.php?equipe_id=$equipe_id");
+                exit();
+            } else {
+                echo 'ID de equipe inválido.';
+            }
+        } catch (PDOException $e) {
+            echo 'Erro ao cadastrar atividade: ' . $e->getMessage();
+        }
+    } else {
+        echo 'Parâmetros ausentes.';
     }
 } else {
-    // Se os dados não forem enviados via POST, redireciona de volta para a página de cadastro de atividades
-    header("Location: formCadastroAtividade.php");
+    header("Location: ../visao/formCadastrarAtividade.php");
     exit();
 }
 ?>
