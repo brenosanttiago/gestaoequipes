@@ -70,7 +70,10 @@ try {
                         <td><?php echo $index + 1; ?></td>
                         <td><?php echo $equipe['nome']; ?></td>
                         <td>
-                          <button class="btn btn-danger">Excluir</button>
+                        <form action="/gestaoequipes/controle/CtrlExcluir.php" method="post">
+                        <input type="hidden" name="equipe_id" value="<?php echo $equipe['equipe_id']; ?>">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta equipe?')">Excluir</button>
+                        </form>
                           <a href="/gestaoequipes/visao/formListarAtividades.php?equipe_id=<?php echo $equipe['equipe_id']; ?>" class="btn btn-success">Visualizar</a>
                         </td>
                     </tr>

@@ -80,7 +80,12 @@ if (isset($_GET['equipe_id'])) {
                     <tr>
                         <td><?php echo $index + 1; ?></td>
                         <td><?php echo $atividade['descricao']; ?></td>
-                        <!-- Outras células com informações das atividades -->
+                        <td>
+                        <form action="/gestaoequipes/controle/CtrlExcluirAtividade.php" method="post">
+                        <input type="hidden" name="atividade_id" value="<?php echo $atividade['atividade_id']; ?>">
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Tem certeza que deseja excluir esta atividade?')">Excluir</button>
+                        </form>
+                        </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
